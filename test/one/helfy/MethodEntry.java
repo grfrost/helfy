@@ -1,5 +1,7 @@
 package one.helfy;
 
+import java.nio.file.Path;
+
 public class MethodEntry {
     static final JVM jvm = new JVM();
     static final int oopSize = jvm.intConstant("oopSize");
@@ -76,7 +78,16 @@ public class MethodEntry {
     }
 
     public static void main(String[] args) throws Exception {
-        System.loadLibrary("MethodEntry");
+
+
+            for (String s : new String[]{"build/libMethodEntry.so"}) {
+                 System.out.println("trying  " + s);
+                Path path = Path.of(s);
+                  System.out.println("path " + path.toAbsolutePath().normalize().toString());
+                Runtime.getRuntime().load(path.toAbsolutePath().normalize().toString());
+
+            }
+
 
         // Force compilation
         benchmark();

@@ -17,6 +17,7 @@ public class GetBytecode {
                 : unsafe.getInt(targetClass, klassOffset) & 0xffffffffL;
 
         long methodArray = jvm.getAddress(klass + jvm.type("InstanceKlass").offset("_methods"));
+        long start = jvm.getAddress(klass + jvm.type("InstanceKlass").offset("_methods"));
         int methodCount = jvm.getInt(methodArray);
         long methods = methodArray + jvm.type("Array<Method*>").offset("_data");
 
